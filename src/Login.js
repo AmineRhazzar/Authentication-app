@@ -5,7 +5,16 @@ const Login = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(values);
+        fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values)
+        })
+            .then((res) => res.text())
+            .then(resText => console.log(resText))
+            .catch((err) => console.log(err));
     };
     return (
         <>
@@ -29,11 +38,13 @@ const Login = (props) => {
                         setValues({ ...values, passwd: e.target.value });
                     }}
                 />
-                <button class="submit-btn" type="submit">
+                <button className="submit-btn" type="submit">
                     Log in
                 </button>
             </form>
-            <button className="show-reg" onClick={props.showReg}>Have an account? Log in</button>
+            <button className="show-reg" onClick={props.showReg}>
+                Have an account? Log in
+            </button>
         </>
     );
 };
