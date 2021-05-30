@@ -1,13 +1,92 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body,
+#root {
+  font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    display: grid;
+    place-items: center;
+}
+
+.app {
+    height: 50%;
+    width: min(25rem, 100vw);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: 1px solid #BDBDBD;
+    border-radius: 24px;
+    padding: 2rem;
+  }
+
+.app h4{
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.app form {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.app form * {
+    margin-bottom: 1rem;
+}
+
+input {
+    width: 100%;
+    height: 2 rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    outline: none;
+    transition: .3s all ease;
+}
+input:focus{
+  box-shadow: 0 1px 3px 0 #999;
+}
+
+.submit-btn {
+    width: 50%;
+    height: 2.5rem;
+    background-color: #2f80ed;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    margin-top: 1rem;
+    font-size: .8 rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s all ease;
+}
+
+.submit-btn:hover{
+  background-color: #4e90e7;
+}
+
+.show-reg{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: .8rem;
+  color: #2f80ed;
+  width: fit-content;
+  align-self: flex-end;
+}
+.show-reg:hover{
+  text-decoration: underline;
 }
