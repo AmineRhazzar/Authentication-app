@@ -10,11 +10,11 @@ const Login = (props) => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(values)
+            body: JSON.stringify(values),
         })
             .then((res) => res.text())
-            .then(resText => console.log(resText))
-            .catch((err) => console.log(err));
+            .then((resText) => console.log("hello " + resText))
+            .catch((e) => console.log(e));
     };
     return (
         <>
@@ -43,7 +43,7 @@ const Login = (props) => {
                 </button>
             </form>
             <button className="show-reg" onClick={props.showReg}>
-                Have an account? Log in
+                No account yet? Register
             </button>
         </>
     );

@@ -9,6 +9,16 @@ const Register = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        fetch("http://localhost:5000/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values)
+        })
+            .then((res) => res.text())
+            .then(resText => console.log(resText))
+            .catch((err) => console.log(err));
     }
     return (
         <>
@@ -39,7 +49,7 @@ const Register = (props) => {
                     Register
                 </button>
             </form>
-            <button className="show-reg" onClick={props.showLogin}>No account yet? Register</button>
+            <button className="show-reg" onClick={props.showLogin}>Have an account? Log in</button>
         </>
     );
 };
