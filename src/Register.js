@@ -1,25 +1,43 @@
 import React, { useState } from "react";
 
 const Register = (props) => {
-
-    const [values, setValues] = useState({ fullName: "", email: "", passwd: "" });
+    const [loading, setLoading] = useState(false);
+    const [userCreationState, setUserCreationState] = useState({
+        created: false,
+        notCreated: false,
+    });
+    const [values, setValues] = useState({
+        fullName: "",
+        email: "",
+        passwd: "",
+    });
     const handleInputChange = (e) => {
-        setValues({ ...values, [e.target.name] : e.target.value });
-    }
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
 
     const handleSubmit = (e) => {
+        setLoading(true);
         e.preventDefault();
         fetch("http://localhost:5000/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(values)
+            body: JSON.stringify(values),
         })
-            .then((res) => res.text())
-            .then(resText => console.log(resText))
-            .catch((err) => console.log(err));
-    }
+            .then((res) => res.status)
+            .then((status) => {
+                setLoading(false);
+                if (status === 201) {
+                    setUserCreationState({ created: true, notCreated: true });
+                } else {
+                    setUserCreationState({ created: false, notCreated: true });
+                }
+            })
+            .catch((err) => {
+                setUserCreationState({ created: false, notCreated: true });
+            });
+    };
     return (
         <>
             <h4>Register</h4>
@@ -45,11 +63,20 @@ const Register = (props) => {
                     value={values.passwd}
                     onChange={handleInputChange}
                 />
-                <button class="submit-btn" type="submit">
-                    Register
+                <button className="submit-btn" type="submit" disabled={loading}>
+                    {loading ? "Creating a user" : "Register"}
                 </button>
             </form>
-            <button className="show-reg" onClick={props.showLogin}>Have an account? Log in</button>
+            <p className={`message ${userCreationState.created ? "success":userCreationState.notCreated? "failed":""}`}>
+                {userCreationState.created
+                    ? "User has been created"
+                    : userCreationState.notCreated
+                    ? "An error has occured. Try again"
+                    : ""}
+            </p>
+            <button className="show-reg" onClick={props.showLogin}>
+                Have an account? Log in
+            </button>
         </>
     );
 };

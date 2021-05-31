@@ -1,7 +1,14 @@
 [
     {
+        "ID": 1,
         "fullName": "Amine",
         "email": "mohammedelaminerhazzar@gmail.com",
-        "hashedPasswd": "$2b$10$3ycvfjyUtv69YvwpaLhl1.MPZ5DUlRI4vZb49lL1mfbGufqtLus2."
+        "passwd": "$2b$10$G8FeFHRjV3L3TIHEKsuUAOAgT0ldGZlMQ7AYX3KRC9.zBRjNQeqVW"
+    },
+    {
+        "ID": 2,
+        "fullName": "eleanor",
+        "email": "sacriopa@gmail.com",
+        "passwd": "$2b$10$D3tnciaSSl0zQy4KHR.EY.y3HTgfYfAdlJPI23ni5/3hIzKR7J9XK"
     }
 ]

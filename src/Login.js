@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
 const Login = (props) => {
+    const [loading, setLoading] = useState(false);
     const [values, setValues] = useState({ email: "", passwd: "" });
 
     const handleSubmit = (e) => {
+        setLoading(true);
         e.preventDefault();
         fetch("http://localhost:5000/login", {
             method: "POST",
@@ -12,8 +14,14 @@ const Login = (props) => {
             },
             body: JSON.stringify(values),
         })
-            .then((res) => res.text())
-            .then((resText) => console.log("hello " + resText))
+            .then((res) => {
+                console.log(res.headers["authorization"]);
+                return res.json();
+            })
+            .then((resJSON) => {
+                setLoading(false);
+                props.setUserInfo(resJSON);
+            })
             .catch((e) => console.log(e));
     };
     return (
@@ -38,8 +46,8 @@ const Login = (props) => {
                         setValues({ ...values, passwd: e.target.value });
                     }}
                 />
-                <button className="submit-btn" type="submit">
-                    Log in
+                <button className="submit-btn" type="submit" disabled={loading}>
+                    {loading? "Loggin in":"Log in"}
                 </button>
             </form>
             <button className="show-reg" onClick={props.showReg}>
